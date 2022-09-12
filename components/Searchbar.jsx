@@ -140,7 +140,7 @@ function Searchbar() {
       <div style={{display:"none"}} className="searchform  w-full p-4 bg-gray-700">
       <input value={searchUsername} onKeyDown={handlekey} onChange={(e)=>setsearchUsername(e.target.value)} className="w-full bg-transparent border-none outline-none" type="text" placeholder="Search User"/>
       </div>
-        {err && <p>User Not Found</p>}
+        {err && <p>Users Not Found</p>}
       {allusers?.map((user1)=>(
 
 

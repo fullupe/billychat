@@ -17,7 +17,7 @@ function Chat() {
 
   const {data}=useContext(ChatContext);
 
-    console.log("data",data)
+    //console.log("data",data)
 
   return (
     <div className="flex-1 w-32 items-center justify-center  text-white">
