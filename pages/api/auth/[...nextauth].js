@@ -28,21 +28,21 @@ export default NextAuth({
     // ...add more providers here
   ],
 
-  adapter:FirebaseAdapter({
-    db,
-    collection,
-    query,
-    getDocs,
-    where,
-    limit,
-    doc,
-    setDoc,
-    getDoc,
-    addDoc,
-    updateDoc,
-    deleteDoc,
-    runTransaction,
-  }),
+  // adapter:FirebaseAdapter({
+  //   db,
+  //   collection,
+  //   query,
+  //   getDocs,
+  //   where,
+  //   limit,
+  //   doc,
+  //   setDoc,
+  //   getDoc,
+  //   addDoc,
+  //   updateDoc,
+  //   deleteDoc,
+  //   runTransaction,
+  // }),
   // addDoc(doc(db,"userChats", token.id), {});
    //setDoc(doc(db,"userChats", token.id), {}),
 
@@ -64,7 +64,7 @@ callbacks: {
     if (session?.user) { 
       session.user.id = token.uid;
       //db.collection("userChat").document(user.getUid()).collection("users")
-      await setDoc(doc(db,"userChats", session.user.id),{})
+      //await setDoc(doc(db,"userChats", session.user.id),{})
 
     }
     return session;
