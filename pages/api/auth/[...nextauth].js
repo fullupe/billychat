@@ -3,8 +3,13 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 import {FirebaseAdapter} from "@next-auth/firebase-adapter";
- import {db} from "../../../firebase"
+
+import { initializeApp, getApp, getApps } from "firebase/app"
+
+ //import {db} from "../../../firebase"
 import {
+  //db,
+  getFirestore,
   collection,
   query,
   getDocs,
@@ -17,7 +22,20 @@ import {
   setDoc,
   deleteDoc,
   runTransaction,
+  
 } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDT5FTYlSl4xLVxijJ1CFJwYYaof7Y3Tn4",
+  authDomain: "williechat-33ffb.firebaseapp.com",
+  projectId: "williechat-33ffb",
+  storageBucket: "williechat-33ffb.appspot.com",
+  messagingSenderId: "1002887064262",
+  appId: "1:1002887064262:web:3aed57e8e8035889d505c7"
+};
+
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
+ const db = getFirestore()
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -28,21 +46,21 @@ export default NextAuth({
     // ...add more providers here
   ],
 
-  // adapter:FirebaseAdapter({
-  //   db,
-  //   collection,
-  //   query,
-  //   getDocs,
-  //   where,
-  //   limit,
-  //   doc,
-  //   setDoc,
-  //   getDoc,
-  //   addDoc,
-  //   updateDoc,
-  //   deleteDoc,
-  //   runTransaction,
-  // }),
+  adapter:FirebaseAdapter({
+    db,
+    collection,
+    query,
+    getDocs,
+    where,
+    limit,
+    doc,
+    setDoc,
+    getDoc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    runTransaction,
+  }),
   // addDoc(doc(db,"userChats", token.id), {});
    //setDoc(doc(db,"userChats", token.id), {}),
 
@@ -64,7 +82,7 @@ callbacks: {
     if (session?.user) { 
       session.user.id = token.uid;
       //db.collection("userChat").document(user.getUid()).collection("users")
-      //await setDoc(doc(db,"userChats", session.user.id),{})
+      await setDoc(doc(db,"userChats", session.user.id),{})
 
     }
     return session;
